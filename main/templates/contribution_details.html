@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+
+
+{% block title %}
+	{{contribution.article}}
+{% endblock title%}
+
+
+{% block content %}
+
+<div class="col-lg-11 m-auto">
+	<div class="card mt-5">
+		<div class="card-header">
+			{{contribution.article}}
+		</div>
+		<div class="card-body">
+			<div class='card p-1'>
+				{% for line in comparison %}
+					{% if not line|make_list|first == '?' %}
+						{% if line|make_list|first == '-' %}
+							<p class="mb-0 red-background">
+						{% elif line|make_list|first == '+' %}
+							<p class="mb-0 green-background">
+						{% endif %}
+						{{line}}</p>
+					{% endif %}
+					
+				{% endfor %}
+			</div>
+			<div class="d-flex justify-content-center">
+				<a href="{% url 'accept-changes' contribution.id %}" class="btn btn-outline-success col-lg-5 col-xs-11 m-2">Accept</a>
+				<a href="{% url 'decline-changes' contribution.id %}" class="btn btn-outline-danger col-lg-5 col-xs-11 m-2 ">Reject</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock content %}
+

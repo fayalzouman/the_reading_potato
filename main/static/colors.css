@@ -1,0 +1,19 @@
+.green-background {
+	background-color: rgba(0,255,0,0.1);
+}
+
+.red-background {
+	background-color: rgba(255,0,0,0.1);
+}
+
+.potato-color {
+	color: rgb(195,184,139);
+}
+
+.black {
+	color: black;
+}
+
+a.black:hover{
+	color: rgb(82,156,57);
+}

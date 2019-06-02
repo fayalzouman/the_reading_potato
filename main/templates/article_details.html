@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{article.title}}
+{% endblock title%}
+
+
+{% block content %}
+
+<div class="col-lg-11 m-auto">
+	<div class="card mt-5">
+		<div class="card-body">
+			<h2>{{article.title}}</h2>
+			<span class="paragraph" >{{article.content}}</span>
+		</div>
+		<div class="card-footer text-muted">
+		    Author : {{article.author}} 
+		    {% if request.user == article.author %}
+		    <a href="{% url 'edit-article' article.slug %}" class="float-right btn btn-outline-success">Edit</a>
+		    {% else %}
+		    <a href="{% url 'contribute-to-article' article.slug %}" class="float-right btn btn-outline-success">Contribute</a>
+		    {% endif %}
+		    <br>
+		    {% if contributions %}
+			    Contributors:
+			    {% for contribution in contributions %}
+					{{contribution.user}}, 
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{% endblock content%}

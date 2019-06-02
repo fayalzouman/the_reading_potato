@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Contribution
+{% endblock title%}
+
+
+{% block content %}
+
+<div class="col-lg-10 m-auto">
+	<div class="card mt-5">
+		<div class="card-header">
+			Contributions
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+				    <tr>
+				    	<th scope="col" style="width: 20%;">Submission Date</th>
+				      	<th scope="col">Article</th>
+				      	<th scope="col" class="text-right"></th>
+				    </tr>
+				</thead>
+				<tbody>
+					{% for contribution in contributions %}
+						<tr>
+						    <td style="width: 15%;">
+						    	{{contribution.date}}
+							</td>
+						    <td>{{contribution.article}}</td>
+						    <td class="text-right">
+						      	<a href="{% url 'contribution-details' contribution.id %}" class="btn btn-outline-success">Review</a>
+					  		</td>
+					    </tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock content %}
