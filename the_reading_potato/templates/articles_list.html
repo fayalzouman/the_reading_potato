@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <ul>
+      {% for article in articles %}
+      <li>
+        <h1>{{article.title}}</h1>
+        <p>{{article.created_on}}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
