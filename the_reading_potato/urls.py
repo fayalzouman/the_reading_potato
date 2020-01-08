@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from the_reading_potato import views
+from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', views.articles_list, name="articles-list"),
+    path('articles/<int:article_id>/', views.article_details, name="article-details"),
+    path('articles/<int:article_id>/', views.article_details, name="article-details"),
+
 ]
 
 
