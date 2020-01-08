@@ -31,6 +31,7 @@ urlpatterns = [
     path('my-articles/', views.my_articles_list, name="my-articles-list"),
     path('register/', auth_views.register, name="register"),
     path('login/', auth_views.login_view , name="login"),
+    path('logout/', auth_views.logout_view, name="logout"),
 ]
 
 

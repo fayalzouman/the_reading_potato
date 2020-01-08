@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from .forms import UserLogin, UserRegister
 
 
@@ -18,6 +18,10 @@ def register(request):
     }
 	return render(request, 'register.html', context)
 
+def logout_view(request):
+	logout(request)
+	return redirect('articles-list')
+    
 def login_view(request):
 	form = UserLogin()
 	if request.method == 'POST':
