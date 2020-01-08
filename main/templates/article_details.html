@@ -5,5 +5,6 @@
     <h1>{{article.title}}</h1>
     <h6>{{article.author}}</h6>
     <p>{{article.content}}</p>
+    <a href="{% url 'edit-article' article.id %}">Edit</a>
   </body>
 </html>
