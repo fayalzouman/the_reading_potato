@@ -45,3 +45,6 @@ def edit_article(request, article_id):
 
 	context = {"form":form, "article":article}
 	return render(request, 'edit_article.html', context)
+
+def my_articles_list(request):
+	return render(request, "my_articles_list.html")
