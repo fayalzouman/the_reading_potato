@@ -5,18 +5,18 @@ from .forms import ArticleForm
 # from django.contrib.auth import login, authenticate, logout
 
 def articles_list(request):
-    articles = Article.objects.all()
-    print(articles)
-    context = {
-        "articles" : articles,
-    }
-    return render(request, "articles_list.html", context)
+	articles = Article.objects.all()
+	print(articles)
+	context = {
+		"articles" : articles,
+	}
+	return render(request, "articles_list.html", context)
 
 def article_details(request, article_id):
-    context = { 
-        "article" : Article.objects.get(id=article_id)
-        }
-    return render(request, 'article_details.html', context)
+	context = { 
+		"article" : Article.objects.get(id=article_id)
+		}
+	return render(request, 'article_details.html', context)
 
 def create_article(request):
 	form = ArticleForm()
@@ -40,7 +40,7 @@ def edit_article(request, article_id):
 		form = ArticleForm(request.POST, instance=article)
 
 		if form.is_valid():
-		    form.save()
+			form.save()
 			return redirect('article-details', article_id)
 
 	context = {"form":form, "article":article}
