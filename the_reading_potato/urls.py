@@ -32,6 +32,8 @@ urlpatterns = [
     path('register/', auth_views.register, name="register"),
     path('login/', auth_views.login_view , name="login"),
     path('logout/', auth_views.logout_view, name="logout"),
+    path('contribute/<article_id>/', views.contribute_to_article, name="contribute-to-article"),
+
 ]
 
 
