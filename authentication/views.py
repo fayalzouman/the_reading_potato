@@ -14,16 +14,18 @@ def register(request):
 			login(request, user)
 			return redirect("articles-list")
 	context = {
-        "form":form,
-    }
+		"form":form,
+	}
 	return render(request, 'register.html', context)
 
 def logout_view(request):
 	logout(request)
 	return redirect('articles-list')
-    
+
 def login_view(request):
 	form = UserLogin()
+	if request.user.is_authenticated:
+		return redirect('articles-list')
 	if request.method == 'POST':
 		form = UserLogin(request.POST)
 		if form.is_valid():
@@ -36,6 +38,6 @@ def login_view(request):
 				return redirect('articles-list')
 
 	context = {
-        "form":form
-    }
+		"form":form
+	}
 	return render(request, 'login.html', context)

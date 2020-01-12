@@ -20,6 +20,8 @@ def article_details(request, article_id):
 
 def create_article(request):
 	form = ArticleForm()
+	if request.user.is_anonymous:
+		return redirect('login')
 	if request.method == "POST":
 		form = ArticleForm(request.POST)
 		if form.is_valid():
@@ -33,9 +35,12 @@ def create_article(request):
 	return render(request, "create_article.html", context)
 
 def edit_article(request, article_id):
+	
 	article = Article.objects.get(id=article_id)
-
 	form = ArticleForm(instance=article)
+	if article.author != request.user:
+		return redirect('article-details', article_id)
+
 	if request.method == "POST":
 		form = ArticleForm(request.POST, instance=article)
 
