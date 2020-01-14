@@ -59,6 +59,14 @@ def my_contributions_list(request):
 		return redirect('login')
 
 	return render(request, "my_contributions_list.html")
+
+def contributions_list(request):
+	if request.user.is_anonymous:
+		return redirect('articles-list')
+
+	contributions = Contribution.objects.filter(status=Contribution.PENDING, article__author=request.user)
+	context = {"contributions" : contributions}
+	return render(request, 'contributions_list.html', context)
 	
 def contribute_to_article(request, article_id):
 	if request.user.is_anonymous:

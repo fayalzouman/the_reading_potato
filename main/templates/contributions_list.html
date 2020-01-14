@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block content %}
+<ul>
+  {% for contribution in contributions %}
+  <li>
+    {{contribution.date}} - {{contribution.article}} -
+    <a href="{% url 'contribution-details' contribution.id %}">Review</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content%}
