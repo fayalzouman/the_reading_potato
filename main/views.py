@@ -54,6 +54,12 @@ def edit_article(request, article_id):
 def my_articles_list(request):
 	return render(request, "my_articles_list.html")
 
+def my_contributions_list(request):
+	if request.user.is_anonymous:
+		return redirect('login')
+
+	return render(request, "my_contributions_list.html")
+	
 def contribute_to_article(request, article_id):
 	if request.user.is_anonymous:
 		return redirect('login')
