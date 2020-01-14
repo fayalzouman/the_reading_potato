@@ -42,7 +42,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'articles-list' %}"
+      <a class="navbar-brand" href="{% url 'articls-list' %}"
         >The Reading Potato</a
       >
       <button
@@ -63,12 +63,34 @@
           <a class="nav-link" href="{% url 'my-articles-list' %}"
             >My Articles</a
           >
+          <a class="nav-link" href="{% url 'contributions-list' %}"
+            >Contributions</a
+          >
+          <a class="nav-link" href="{% url 'my-contributions-list' %}"
+            >My Contributions</a
+          >
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           {% else %}
           <a class="nav-link" href="{% url 'login' %}">Login</a>
           <a class="nav-link" href="{% url 'register' %}">Register</a>
           {% endif %}
         </div>
+
+        <form
+          action="{% url 'articles-list' %}"
+          class="form-inline"
+          method="GET"
+        >
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            name="q"
+            value="{{request.GET.q}}"
+          />
+          <button class="btn" type="submit">Search</button>
+        </form>
       </div>
     </nav>
 

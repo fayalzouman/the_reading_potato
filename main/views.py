@@ -6,13 +6,16 @@ import difflib
 # from django.contrib.auth import login, authenticate, logout
 
 def articles_list(request):
-	articles = Article.objects.all()
-	print(articles)
-	context = {
-		"articles" : articles,
-	}
-	return render(request, "articles_list.html", context)
+    articles = Article.objects.all()
 
+    query = request.GET.get("q")
+    if query:
+        articles = articles.filter(title__contains=query)
+
+    context = {
+        "articles" : articles,
+    }
+    return render(request, "articles_list.html", context)
 def article_details(request, article_id):
 	context = { 
 		"article" : Article.objects.get(id=article_id)
