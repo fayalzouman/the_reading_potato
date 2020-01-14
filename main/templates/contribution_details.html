@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block content %} {% for line in comparison %} {% if
+not line|make_list|first == '?' %} {% if line|make_list|first == '-' %}
+<p class="red-background">
+  {% elif line|make_list|first == '+' %}
+</p>
+
+<p class="green-background">
+  {% endif %} {{line}}
+</p>
+{% endif %} {% endfor %} {% endblock content%}

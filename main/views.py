@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ArticleForm, ContributeArticleForm
 from .models import Article, Contribution, Change
+import difflib
 
 # from django.contrib.auth import login, authenticate, logout
 
@@ -67,7 +68,7 @@ def contributions_list(request):
 	contributions = Contribution.objects.filter(status=Contribution.PENDING, article__author=request.user)
 	context = {"contributions" : contributions}
 	return render(request, 'contributions_list.html', context)
-	
+
 def contribute_to_article(request, article_id):
 	if request.user.is_anonymous:
 		return redirect('login')
@@ -90,3 +91,19 @@ def contribute_to_article(request, article_id):
 
 	context = {"form":form, "article":article}
 	return render(request, 'contribute_to_article.html', context)
+
+def contribution_details(request, contribution_id):
+	contribution = Contribution.objects.get(id=contribution_id)
+	if request.user != contribution.article.author:
+		return redirect('articles-list')
+
+	d = difflib.Differ()
+	comparison = list(d.compare(contribution.article.content.splitlines(True), contribution.change.new_content.splitlines(True)))
+
+
+	context = {
+		"contribution" : contribution,
+		"comparison" : comparison,
+	}
+	
+	return render(request, 'contribution_details.html', context)
