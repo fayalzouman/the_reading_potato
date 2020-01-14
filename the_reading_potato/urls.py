@@ -35,6 +35,8 @@ urlpatterns = [
     path('my-contributions/', views.my_contributions_list, name="my-contributions-list"),
     path('contributions/', views.contributions_list, name="contributions-list"),
     path('contributions/<int:contribution_id>/', views.contribution_details, name="contribution-details"),
+    path('accept/<int:contribution_id>/', views.accept_changes, name="accept-changes"),
+    path('decline/<int:contribution_id>/', views.decline_changes, name="decline-changes"),
 ]
 
 

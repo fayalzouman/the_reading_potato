@@ -8,3 +8,6 @@ not line|make_list|first == '?' %} {% if line|make_list|first == '-' %}
   {% endif %} {{line}}
 </p>
 {% endif %} {% endfor %} {% endblock content%}
+
+<a href="{% url 'accept-changes' contribution.id %}">Accept</a>
+<a href="{% url 'decline-changes' contribution.id %}">Decline</a>

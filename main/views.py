@@ -107,3 +107,34 @@ def contribution_details(request, contribution_id):
 	}
 	
 	return render(request, 'contribution_details.html', context)
+
+def accept_changes(request, contribution_id):
+	contribution = Contribution.objects.get(id=contribution_id)
+
+	if request.user != contribution.article.author:
+		return redirect('articles-list')
+
+	
+	contribution.status = Contribution.ACCEPTED
+	contribution.save()
+
+	article = contribution.article
+	article.content = contribution.change.new_content
+	article.save()
+
+	contribution.change.delete()
+
+	return redirect('contributions-list')
+
+def decline_changes(request, contribution_id):
+	contribution = Contribution.objects.get(id=contribution_id)
+
+	if request.user != contribution.article.author :
+		return redirect('articles-list')
+
+	contribution.status = Contribution.DECLINED
+	contribution.save()
+
+	contribution.change.delete()
+
+	return redirect('contributions-list')
