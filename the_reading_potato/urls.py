@@ -37,6 +37,7 @@ urlpatterns = [
     path('contributions/<int:contribution_id>/', views.contribution_details, name="contribution-details"),
     path('accept/<int:contribution_id>/', views.accept_changes, name="accept-changes"),
     path('decline/<int:contribution_id>/', views.decline_changes, name="decline-changes"),
+    path('articles/<article_slug>/', views.article_details, name="article-details"),
 ]
 
 

@@ -3,21 +3,9 @@ from .forms import ArticleForm, ContributeArticleForm
 from .models import Article, Contribution, Change
 import difflib
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.defaultfilters import slugify
 
 
-# from django.contrib.auth import login, authenticate, logout
-
-# def articles_list(request):
-#     articles = Article.objects.all()
-
-#     query = request.GET.get("q")
-#     if query:
-#         articles = articles.filter(title__contains=query)
-
-#     context = {
-#         "articles" : articles,
-#     }
-#     return render(request, "articles_list.html", context)
 def articles_list(request):
 	articles = Article.objects.all()
 
@@ -169,15 +157,19 @@ def decline_changes(request, contribution_id):
 	return redirect('contributions-list')
 
 
-def article_details(request, article_id):
-	article = Article.objects.get(id=article_id)
-	if settings.DEBUG:
-		contributions = article.contributions.filter(status=Contribution.ACCEPTED)
-	else:
-		contributions = article.contributions.filter(status=Contribution.ACCEPTED).distinct('user')
+# def article_details(request, article_id):
+# 	article = Article.objects.get(id=article_id)
+# 	if settings.DEBUG:
+# 		contributions = article.contributions.filter(status=Contribution.ACCEPTED)
+# 	else:
+# 		contributions = article.contributions.filter(status=Contribution.ACCEPTED).distinct('user')
 
-	context = {
-		"article": article,
-		"contributions": contributions,
-		}
-	return render(request, "article_details.html", context)
+# 	context = {
+# 		"article": article,
+# 		"contributions": contributions,
+# 		}
+# 	return render(request, "article_details.html", context)
+
+def article_details(request, article_slug):
+    context = { "article" : Article.objects.get(slug=article_slug)}
+    return render(request, 'article_details.html', context)
